@@ -20,7 +20,7 @@ class BancoDeDados:
                 database=self.database
             )
             self.cursor = self.conexao.cursor()
-            print("\nConexão com o banco de dados estabelecida com SUCESSO.")
+            print("\nConexão com o banco de dados estabelecida com SUCESSO.\n")
         except mysql.connector.Error as e:
             print(f"Erro ao conectar com o banco de dados: {e}")
 
@@ -42,7 +42,7 @@ class BancoDeDados:
             valores = (funcionario.get_nome(), funcionario.get_cpf(), funcionario.get_salario(), funcionario.get_idtipo())
             self.cursor.execute(query, valores)
             self.conexao.commit()
-            print(f"\nFuncionário {funcionario.get_nome()} cadastrado com SUCESSO.")
+            print(f"\nFuncionário {funcionario.get_nome()} cadastrado com SUCESSO.\n")
         except mysql.connector.Error as e:
             print(f"Erro ao cadastrar funcionário: {e}")
 
@@ -53,7 +53,7 @@ class BancoDeDados:
             valores = (tipo.get_descricao(), tipo.get_informacao_adicional())
             self.cursor.execute(query, valores)
             self.conexao.commit()
-            print(f"\nTipo {tipo.get_descricao()} cadastrado com SUCESSO.")
+            print(f"\nTipo {tipo.get_descricao()} cadastrado com SUCESSO.\n")
         except mysql.connector.Error as e:
             print(f"Erro ao cadastrar tipo: {e}")
 
@@ -64,7 +64,7 @@ class BancoDeDados:
             valores = (projeto.get_nome(), projeto.get_descricao())
             self.cursor.execute(query, valores)
             self.conexao.commit()
-            print(f"\nProjeto {projeto.get_nome()} cadastrado com SUCESSO.")
+            print(f"\nProjeto {projeto.get_nome()} cadastrado com SUCESSO.\n")
         except mysql.connector.Error as e:
             print(f"Erro ao cadastrar projeto: {e}")
 
@@ -75,7 +75,7 @@ class BancoDeDados:
             valores = (alocacao.get_horas_trabalhadas(), alocacao.get_papel_funcionario(), alocacao.get_idProjeto(), alocacao.get_idFuncionario())
             self.cursor.execute(query, valores)
             self.conexao.commit()
-            print(f"\nAlocação registrada para o funcionário (ID {alocacao.get_idFuncionario()}) com SUCESSO.")
+            print(f"\nAlocação registrada para o funcionário (ID {alocacao.get_idFuncionario()}) com SUCESSO.\n")
         except mysql.connector.Error as e:
             print(f"Erro ao cadastrar alocação: {e}")
 
@@ -159,12 +159,16 @@ class BancoDeDados:
             """
             self.cursor.execute(query)
             projetos = self.cursor.fetchall()
+
             if projetos:
                 print(tabulate(projetos, headers=["ID", "Nome", "Descrição"], tablefmt="fancy_grid"))
+                return projetos
             else:
                 print("Nenhum projeto encontrado.")
+                return []
         except mysql.connector.Error as e:
             print(f"Erro ao consultar projetos: {e}")
+            return []
 
 
     def consultar_alocacoes(self): #Consulta de alocaçoes (Local onde os funcionarios estão trabalhando, especificando o projeto)
@@ -180,7 +184,7 @@ class BancoDeDados:
                 alocacoes a
             JOIN 
                 funcionario f ON a.funcionario_idfuncionario = f.idfuncionario
-            JOIN 
+            JOIN
                 projetos p ON a.projetos_idprojetos = p.idprojetos
             ORDER BY a.idalocacoes ASC
             """
@@ -239,7 +243,7 @@ class BancoDeDados:
             self.cursor.execute(query, valores)
             self.conexao.commit()
             if self.cursor.rowcount > 0:
-                print(f"Salário do funcionário (ID {idfuncionario}) atualizado com SUCESSO.")
+                print(f"Salário do funcionário (ID {idfuncionario}) atualizado com SUCESSO.\n")
             else:
                 print("\nNenhum funcionário encontrado com o ID escolhido.")
         except mysql.connector.Error as e:
