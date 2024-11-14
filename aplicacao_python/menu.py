@@ -13,14 +13,14 @@ class Menu:
         for letra in grande_titulo:
             sys.stdout.write(letra)
             sys.stdout.flush()
-            time.sleep(0.001)
+            time.sleep(0.0001)
 
     def animacao_menu(self, titulo):
         titulo_menu = pyfiglet.figlet_format(titulo, font="standard", width=100)
         for letra in titulo_menu:
             sys.stdout.write(letra)
             sys.stdout.flush()
-            time.sleep(0.001)
+            time.sleep(0.0001)
 
     # MENUS
     def exibir_menu_principal(self):
