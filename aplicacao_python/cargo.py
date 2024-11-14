@@ -1,4 +1,4 @@
-class Tipo:
+class Cargo:
     #Método Construtor
     def __init__(self, descricao, informacao_adicional):
         self.__descricao = descricao
