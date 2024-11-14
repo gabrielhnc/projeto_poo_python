@@ -15,13 +15,13 @@ CREATE SCHEMA IF NOT EXISTS `gestaoFuncionarios` DEFAULT CHARACTER SET utf8 ;
 USE `gestaoFuncionarios` ;
 
 -- -----------------------------------------------------
--- Table `gestaoFuncionarios`.`tipo`
+-- Table `gestaoFuncionarios`.`cargo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `gestaoFuncionarios`.`tipo` (
-  `idtipo` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `gestaoFuncionarios`.`cargo` (
+  `idcargo` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(100) NULL,
   `informacao_adicional` VARCHAR(100) NULL,
-  PRIMARY KEY (`idtipo`))
+  PRIMARY KEY (`idcargo`))
 ENGINE = InnoDB;
 
 
@@ -44,13 +44,13 @@ CREATE TABLE IF NOT EXISTS `gestaoFuncionarios`.`funcionario` (
   `nome` VARCHAR(100) NULL,
   `cpf` VARCHAR(20) NULL,
   `salario` FLOAT NULL,
-  `tipo_idtipo` INT NOT NULL,
+  `cargo_idcargo` INT NULL,
   PRIMARY KEY (`idfuncionario`),
   UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC) VISIBLE,
-  INDEX `fk_funcionario_tipo1_idx` (`tipo_idtipo` ASC) VISIBLE,
+  INDEX `fk_funcionario_tipo1_idx` (`cargo_idcargo` ASC) VISIBLE,
   CONSTRAINT `fk_funcionario_tipo1`
-    FOREIGN KEY (`tipo_idtipo`)
-    REFERENCES `gestaoFuncionarios`.`tipo` (`idtipo`)
+    FOREIGN KEY (`cargo_idcargo`)
+    REFERENCES `gestaoFuncionarios`.`cargo` (`idcargo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
