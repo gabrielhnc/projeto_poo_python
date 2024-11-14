@@ -1,4 +1,6 @@
-# Sistema de Gestão de Funcionários
+# DESATUALIZADO
+
+## Sistema de Gestão de Funcionários 
 
 ## Descrição
 Este projeto é um sistema para gerenciar informações sobre funcionários, projetos e alocações de funcionários em projetos, utilizando o paradigma de Programação Orientada a Objetos (POO) e integração com banco de dados **MySQL**. O sistema permite realizar as operações de cadastro, consulta e atualização de dados de funcionários, tipos de funcionários, projetos e alocações.
