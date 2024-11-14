@@ -62,26 +62,44 @@ class Funcoes:
         print("\n=== Funcionários ===")
         print("Consultando Funcionários...")
         time.sleep(1)
-        self.banco.consultar_funcionarios()
+        funcionarios = self.banco.consultar_funcionarios()
         
         #Validação para o ID do funcionário
         while True:
             try:
+                ids_funcionarios = [funcionario[0] for funcionario in funcionarios]
+
                 idfuncionario = int(input("\nDigite o ID do funcionário a ser alocado: "))
-                break 
+                
+                if idfuncionario <= 0:
+                    print("Insira um ID maior do que 0.")
+                    continue
+                elif idfuncionario not in ids_funcionarios:
+                    print("ID nao presente no banco de dados.")
+                    continue
+                break
             except ValueError:
                 print("Entrada inválida. Por favor, digite um número inteiro para o ID do funcionário.")
 
         print("\n=== Projetos ===")
         print("Consultando projetos...")
         time.sleep(1)
-        self.banco.consultar_projetos()
+        projetos = self.banco.consultar_projetos()
         
         #Validação para o ID do projeto
         while True:
             try:
+                ids_projetos = [projeto[0] for projeto in projetos]
+
                 idprojeto = int(input("\nDigite o ID do projeto que será trabalhado: "))
-                break  
+
+                if idprojeto <= 0:
+                    print("Insira um ID maior do que 0.")
+                    continue
+                elif idprojeto not in ids_projetos:
+                    print("ID nao presente no banco de dados.")
+                    continue
+                break
             except ValueError:
                 print("Entrada inválida. Por favor, digite um número inteiro para o ID do projeto.")
 
@@ -89,6 +107,9 @@ class Funcoes:
         while True:
             try:
                 carga_horaria = int(input("\nDigite a carga horária (Hrs): "))
+                if carga_horaria <= 0:
+                    print("Carga horária deve ser maior do que 0.")
+                    continue
                 break 
             except ValueError:
                 print("Entrada inválida. Por favor, digite um número inteiro para a carga horária.")
@@ -145,6 +166,7 @@ class Funcoes:
 
     def atualizar_salario(self): #Função de interface responsável por realizar a atualização do salário do usuario
         print("\n==== Atualizar Salário  ====")
+        print("Consultando Funcionários...")
         time.sleep(1)
         funcionarios = self.banco.consultar_funcionarios()
         
@@ -170,6 +192,10 @@ class Funcoes:
         while True:
             try:
                 novo_salario = float(input(f"\nNovo salário do funcionário (ID {idfuncionario}): "))
+
+                if novo_salario <= 0:
+                    print(f"Insira um valor maior do que 0 para o novo salário do funcionarios de ID {idfuncionario}")
+                    continue
                 break
             except ValueError:
                 print("Entrada inválida. Por favor, insira um número para o novo salário.")
